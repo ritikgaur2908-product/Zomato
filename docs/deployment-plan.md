@@ -131,7 +131,7 @@ And add `fastapi` and `uvicorn` to your `requirements.txt`.
 1. In Railway, click **New Project** -> **Deploy from GitHub repo**.
 2. Set the build/start command under **Settings** -> **Start Command**:
    ```bash
-   cd /app && python -m app.server
+   sh -c "cd /app && python -m app.server"
    ```
 3. Add the required environment variables (`LLM_API_KEY`, etc.) in the Railway dashboard.
 4. Generate a public domain (e.g. `https://tastefinder-backend.up.railway.app`).
