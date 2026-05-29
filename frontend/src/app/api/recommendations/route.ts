@@ -40,9 +40,17 @@ export async function POST(request: Request): Promise<Response> {
         });
 
         if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}));
+          const responseText = await response.text().catch(() => "");
+          console.error(`Remote API error (${response.status}):`, responseText);
+          let detail = "";
+          try {
+            const parsed = JSON.parse(responseText);
+            detail = parsed.detail || parsed.message || "";
+          } catch (e) {
+            detail = responseText.substring(0, 150);
+          }
           return NextResponse.json(
-            { error: errorData.detail || "Remote server error" },
+            { error: detail || `Remote server error (status ${response.status})` },
             { status: response.status }
           );
         }
