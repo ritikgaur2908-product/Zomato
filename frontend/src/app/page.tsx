@@ -223,7 +223,7 @@ export default function TasteFinderApp() {
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || "Failed to fetch recommendations");
+        throw new Error(data.details ? `${data.error}: ${data.details}` : (data.error || "Failed to fetch recommendations"));
       }
 
       const data: RecommendationResponse = await res.json();
