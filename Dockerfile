@@ -25,6 +25,9 @@ RUN npm ci
 WORKDIR /app
 COPY . .
 
+# Pre-download and cache the Zomato dataset into the container image during build time
+RUN python -c "from data.loader import DatasetLoader; DatasetLoader().load(force_refresh=True)"
+
 # Build the Next.js frontend
 WORKDIR /app/frontend
 RUN npm run build
