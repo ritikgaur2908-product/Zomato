@@ -112,6 +112,16 @@ export async function POST(request: Request): Promise<Response> {
         stderrData += data.toString("utf-8");
       });
 
+      pythonProcess.on("error", (err) => {
+        console.error("Failed to start Python process:", err);
+        resolve(
+          NextResponse.json(
+            { error: `Failed to start Python recommendation process: ${err.message}` },
+            { status: 500 }
+          )
+        );
+      });
+
       pythonProcess.on("close", (code) => {
         if (code !== 0) {
           console.error(`Python process exited with code ${code}. Stderr: ${stderrData}`);
@@ -122,7 +132,7 @@ export async function POST(request: Request): Promise<Response> {
             if (parsed && (parsed.error || parsed.message)) {
               return resolve(
                 NextResponse.json(
-                  { error: parsed.error || parsed.message, details: stderrData },
+                  { error: `${parsed.error || parsed.message} (${stderrData})` },
                   { status: 400 }
                 )
               );
@@ -133,7 +143,7 @@ export async function POST(request: Request): Promise<Response> {
 
           return resolve(
             NextResponse.json(
-              { error: "Failed to generate recommendations", details: stderrData },
+              { error: `Failed to generate recommendations: ${stderrData || "No error details available."}` },
               { status: 500 }
             )
           );
