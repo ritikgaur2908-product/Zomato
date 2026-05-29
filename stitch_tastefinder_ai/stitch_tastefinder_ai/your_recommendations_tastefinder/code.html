@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TasteFinder - Recommendations</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#835500",
+                    "tertiary-container": "#6f7678",
+                    "on-primary-fixed": "#410007",
+                    "on-tertiary-fixed": "#161d1f",
+                    "on-primary-fixed-variant": "#92001c",
+                    "secondary-container": "#feae2c",
+                    "surface-bright": "#f9f9f9",
+                    "primary-fixed-dim": "#ffb3b1",
+                    "on-background": "#1a1c1c",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#291800",
+                    "surface-container-high": "#e8e8e8",
+                    "tertiary-fixed-dim": "#c1c8ca",
+                    "surface-dim": "#dadada",
+                    "outline": "#8f6f6e",
+                    "secondary-fixed-dim": "#ffb955",
+                    "inverse-surface": "#2f3131",
+                    "on-surface": "#1a1c1c",
+                    "background": "#f9f9f9",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-secondary-container": "#6b4500",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#bb162c",
+                    "surface-variant": "#e2e2e2",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed-variant": "#633f00",
+                    "on-primary-container": "#fffbff",
+                    "outline-variant": "#e4bebc",
+                    "secondary-fixed": "#ffddb4",
+                    "on-surface-variant": "#5b403f",
+                    "tertiary-fixed": "#dde4e6",
+                    "primary": "#b7122a",
+                    "surface-container": "#eeeeee",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#ffb3b1",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f3f3f3",
+                    "on-tertiary-fixed-variant": "#41484a",
+                    "on-tertiary-container": "#f9fdff",
+                    "on-primary": "#ffffff",
+                    "surface": "#f9f9f9",
+                    "tertiary": "#565d5f",
+                    "primary-container": "#db313f",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#ffdad8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "lg": "24px",
+                    "container-max": "1200px",
+                    "sm": "12px",
+                    "base": "8px",
+                    "xl": "40px",
+                    "gutter": "16px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "display-lg": ["DM Sans"],
+                    "title-md": ["DM Sans"],
+                    "headline-lg-mobile": ["DM Sans"],
+                    "headline-lg": ["DM Sans"],
+                    "body-lg": ["DM Sans"],
+                    "body-sm": ["DM Sans"],
+                    "label-md": ["DM Sans"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Ensuring material symbols render correctly with specific weights if needed */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface fixed w-full top-0 z-50 transition-colors duration-300">
+<div class="flex justify-between items-center w-full px-md h-16 max-w-container-max mx-auto">
+<div class="font-display-lg text-headline-lg-mobile text-primary tracking-tight">TasteFinder</div>
+<div class="flex items-center space-x-sm">
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors duration-150 active:scale-95 text-on-surface-variant">
+<span class="material-symbols-outlined">location_on</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors duration-150 active:scale-95 text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-surface-variant ml-2">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuWs_SlfjsDusOBzmp35GOVfczFdwSbf6VYQNJ7GmNr5tzM8Fg6ueow5ai38Ao1e4YDuKSD66VuxCi0l4dtfM6lNrPvjTgbVlfISe9l-TPJrFRAHXQb9TVtZ2ltSNhvQ39xX6osVRffe9iPtuwSXNb-tCzJhZxE-DNCn18KjZfFUwiIEHuMrsET6pmFmUC61yaXvFOvwyeAeDLyis_MgCvAiWYNgNTpCsWs946t3s4NIsG0lnZO1dIhiU7WJ53EjHLu_wUWH9GXlQ"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 pb-24 md:pb-12 px-md lg:px-lg max-w-container-max mx-auto w-full flex flex-col gap-lg">
+<!-- Section A: AI Summary Banner -->
+<section class="bg-primary-fixed rounded-xl p-md md:p-lg flex items-start gap-md shadow-sm border border-primary-fixed-dim">
+<div class="mt-1 bg-surface-container-lowest p-2 rounded-full shadow-sm text-primary">
+<span class="material-symbols-outlined icon-filled">auto_awesome</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-primary-fixed mb-xs">AI Recommendation</h2>
+<p class="font-body-lg text-body-lg text-on-primary-fixed-variant opacity-90">
+                    Five strong Italian options in Indiranagar within a medium budget, including family-friendly spots.
+                </p>
+</div>
+</section>
+<!-- Section B: Recommendation Cards (Bento Grid) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md lg:gap-lg">
+<!-- Card 1 (Truffles) - Spans 2 cols on tablet for bento feel -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-md border border-surface-variant hover:shadow-lg transition-shadow duration-300 md:col-span-2 lg:col-span-2 flex flex-col">
+<div class="relative h-48 md:h-64 w-full">
+<img alt="A vibrant, close-up shot of a rustic Italian cafe setting featuring a freshly baked margherita pizza on a wooden board. The scene is illuminated by warm, inviting sunlight streaming through a window, creating a modern, light-mode aesthetic. Soft coral napkins and subtle red accents in the decor echo the brand palette. The mood is relaxed, family-friendly, and appetizing." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDarHahVJv-TgFBvXrOVs03MqDqEYI3SgUi4LAyfdPEi8WwVA0Y00u8Z-arUaKOlYs68KFaYYEdut2zxL-P5ln3_0IDrDCeOUEp5JRj9KcpbY0oCtyWpmFiz9rhvanjf2w7SOjp9pGIJdGRN4n0lDBNK7nAOJX8MgYh_8qCmlAAjUNO83gBvtgsR4nABV3y2_8y6vouHvzhMPTe8BbteVXsTOB47MVrOwup5aEB55YIX2qoz2jeQygA_jeADnjUL-6huTQaaJI3Qk"/>
+<div class="absolute top-md left-md bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full flex items-center gap-xs font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[16px] icon-filled">workspace_premium</span>
+                        Rank #1
+                    </div>
+<button class="absolute top-md right-md p-2 bg-surface-container-lowest/80 backdrop-blur-sm rounded-full text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Truffles</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs mt-1">
+                                Italian • Cafe <span class="text-tertiary-fixed-dim text-xs">•</span> ₹1,200 for two
+                            </p>
+</div>
+<div class="flex items-center gap-xs bg-surface-container-low px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-secondary-container text-[18px] icon-filled">star</span>
+<span class="font-label-md text-label-md text-on-surface">4.6</span>
+</div>
+</div>
+<div class="mt-auto pt-sm">
+<div class="bg-error-container rounded-lg p-sm border-l-4 border-primary flex gap-sm items-start">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">tips_and_updates</span>
+<p class="font-body-sm text-body-sm text-on-error-container">
+                                Highly rated Italian with a relaxed vibe; fits your medium budget and family-friendly ask.
+                            </p>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 2 (Toit) -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-md border border-surface-variant hover:shadow-lg transition-shadow duration-300 flex flex-col">
+<div class="relative h-48 w-full">
+<img alt="A lively, bustling brewpub environment showcasing an artisanal wood-fired pizza accompanied by craft beverages on a dark wooden table. The lighting is dynamic but warm, suggesting an evening out with friends. High-contrast elements and subtle touches of deep red in the ambient light reflect a sophisticated, modern urban dining experience." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRPtC4IfSfoW_9641TGo04rPx3Tm1kyjrkI7HAw42irxLwBOa7f1yijnAY8_mV6PlItWmezshMxzJrxDU8ubHewCTA--nmZkyaMKCt_lrh0GKDJR8iw8OeC1odrdEPJstqMMIY7i_gYIK0QPaGgtl1-g2x-57L-BmBOAQD9rMbAfqZLgbvC4-U2mElBsV1Om_Lcp56n5h3M5MJPfh_MEd1AdWmv1mkXHDre9rKUgAFJexCm71kgnoFyQbhbI3BJ1e1JA2tM1EH_0g"/>
+<div class="absolute top-md left-md bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface px-sm py-xs rounded-full font-label-md text-label-md shadow-sm border border-surface-variant">
+                        Rank #2
+                    </div>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Toit</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                                Italian • Pizza • ₹1,500
+                            </p>
+</div>
+<div class="flex items-center gap-xs bg-surface-container-low px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-secondary-container text-[18px] icon-filled">star</span>
+<span class="font-label-md text-label-md text-on-surface">4.4</span>
+</div>
+</div>
+<div class="mt-auto pt-sm">
+<div class="bg-error-container rounded-lg p-sm border-l-4 border-primary flex gap-sm items-start">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">group</span>
+<p class="font-body-sm text-body-sm text-on-error-container">
+                                Popular brewpub with strong Italian menu; great for groups.
+                            </p>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 3 (Little Italy) -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-md border border-surface-variant hover:shadow-lg transition-shadow duration-300 flex flex-col">
+<div class="relative h-48 w-full">
+<img alt="An elegant, minimalist presentation of a classic pasta dish on a pristine white plate, set against a light marble countertop. The scene is incredibly bright and clean, epitomizing a refined light-mode UI aesthetic. A glass of sparkling water and a touch of warm, organic greenery complete the sophisticated yet accessible dining atmosphere." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy2_9rQ_SZEFdS-HggvkkPIsq5hBoXmvvGrhruWQL8b6EkwgH8BDQnqJD5bNKnfSG01IzJ7_uI292hq-hQq5L1kZ5W9GVNbDEVz9_de_G9knVE1ykmEQ6ZKVmsXd81129JzdUXqWBIQ3tWxQJ_gUF2wrwfvDKUIlnATknpEQx-_haFWM6y3i636li2OOs2NxeCO0h2dVIWGY7JuvXL_yS6YP-qoPu0WmgPysqHsEMbZGUtpNviDfiiiz2m4ot59PjchFTajDJTXcU"/>
+<div class="absolute top-md left-md bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface px-sm py-xs rounded-full font-label-md text-label-md shadow-sm border border-surface-variant">
+                        Rank #3
+                    </div>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Little Italy</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                                Italian • Veg • ₹900
+                            </p>
+</div>
+<div class="flex items-center gap-xs bg-surface-container-low px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-secondary-container text-[18px] icon-filled">star</span>
+<span class="font-label-md text-label-md text-on-surface">4.3</span>
+</div>
+</div>
+<div class="mt-auto pt-sm">
+<div class="bg-error-container rounded-lg p-sm border-l-4 border-primary flex gap-sm items-start">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">restaurant</span>
+<p class="font-body-sm text-body-sm text-on-error-container">
+                                Dedicated Italian spot within budget with consistent ratings.
+                            </p>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 4 (Sample - Chianti) -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-md border border-surface-variant hover:shadow-lg transition-shadow duration-300 flex flex-col">
+<div class="relative h-48 w-full">
+<img alt="A cozy, intimately lit table setting featuring a generous bowl of rich, red-sauce pasta and a glass of red wine. The lighting is soft and inviting, highlighting the textures of the food. The overall mood is romantic and classic, utilizing deep, warm tones that perfectly complement the primary brand color palette." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2NxeBr2mkwNj3MG4Pvpm3FIAxhMDcp_oWXlo5Jb4PSSLlcxjORqQ_H1XJUPYZ77yirpdKLrTHOZPPqASUxvazEgR5Kb2m5vek0dM9boqV-LkXbh9VvZGw7QsRmI0oDtROGgZHYPq3jMHheCd5Sy0luk16JbiOyqoBCe1VCXTuNO3vgkvHBdZK-kplt5dNIuGSn7jAYVfuWSbB1R9BeresDyg6hC9hwdihJKoStOcUYW2Qs2fcCzNb-u-6CCFV3GdxciLZYW8AQn0"/>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Chianti</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                                Fine Italian • ₹1,600
+                            </p>
+</div>
+<div class="flex items-center gap-xs bg-surface-container-low px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-secondary-container text-[18px] icon-filled">star</span>
+<span class="font-label-md text-label-md text-on-surface">4.5</span>
+</div>
+</div>
+<div class="mt-auto pt-sm">
+<div class="bg-error-container rounded-lg p-sm border-l-4 border-primary flex gap-sm items-start">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">wine_bar</span>
+<p class="font-body-sm text-body-sm text-on-error-container">
+                                Upscale experience pushing the budget slightly, but highly recommended for authentic taste.
+                            </p>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 5 (Sample - Pasta Street) -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-md border border-surface-variant hover:shadow-lg transition-shadow duration-300 flex flex-col md:col-span-2 lg:col-span-1">
+<div class="relative h-48 w-full">
+<img alt="A bright, cheerful daytime shot of a casual dining space with plates of diverse pasta dishes scattered across a white marble table. The natural lighting emphasizes freshness and efficiency. Subtle peach and red accents in the tableware tie the composition into a warm, modern, and highly appetizing visual narrative." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ__d2wKS-4qSSzPQNS0Exs7dJXQIPLkSpcgKAPknTa3HptGsFduzAjYpW8GuLEwDuvDT9BYkg66QoTJhZNHkhVRP-19wdlsfW4_h0vsmpBJTEDiAMXuGFa2_7bHWfaGIGqDvKpt4GG697SoQ4GF2KgV980LgOSrOlmpCHDnL55myGO3J14oDmyqZOz0dH7W2GwJ7IUw33cS40TEidKAsePPGHkh_PXNVROnqNGTxw_4pLNNPHHuX0KFiCdAXxJ3gTKt0WmUht_uA"/>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Pasta Street</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                                Italian • Casual • ₹800
+                            </p>
+</div>
+<div class="flex items-center gap-xs bg-surface-container-low px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-secondary-container text-[18px] icon-filled">star</span>
+<span class="font-label-md text-label-md text-on-surface">4.1</span>
+</div>
+</div>
+<div class="mt-auto pt-sm">
+<div class="bg-error-container rounded-lg p-sm border-l-4 border-primary flex gap-sm items-start">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">speed</span>
+<p class="font-body-sm text-body-sm text-on-error-container">
+                                Fast, casual, and well within budget. Good for a quick bite.
+                            </p>
+</div>
+</div>
+</div>
+</article>
+</section>
+<!-- Footer: Search Details -->
+<div class="mt-lg border-t border-surface-variant pt-md">
+<details class="group cursor-pointer">
+<summary class="flex items-center gap-sm font-label-md text-label-md text-on-surface-variant select-none opacity-80 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined transition-transform duration-200 group-open:rotate-180">expand_more</span>
+                    Search details &amp; metrics
+                </summary>
+<div class="mt-sm pl-8 font-body-sm text-body-sm text-on-surface-variant flex flex-col gap-1 opacity-70">
+<p>Candidates considered: 124</p>
+<p>Filters applied: Indiranagar, Italian, Budget ₹800-₹1500, Rating 4.0+</p>
+<p>AI Generation time: 0.8s</p>
+</div>
+</details>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only as per guidelines) -->
+<nav class="fixed w-full bottom-0 rounded-t-xl z-50 md:hidden shadow-lg bg-surface-container">
+<div class="flex justify-around items-center px-md py-base w-full">
+<!-- Active Item: Explore -->
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 duration-200 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined icon-filled">explore</span>
+<span class="font-label-md text-label-md mt-1">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-label-md text-label-md mt-1">Saved</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md mt-1">History</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</button>
+</div>
+</nav>
+</body></html>
